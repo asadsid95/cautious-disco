@@ -88,7 +88,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         const blob = values.profile_photo
         const hasImageChanged = isBase64Image(blob)
 
-        // only fires when picsture is changed (default from Clerk's push to user-uploaded file)
+        // only fires when picture is changed (default from Clerk's push -> user-uploaded file)
         if (hasImageChanged) {
             const imgRes = await startUpload(files)
 
@@ -121,7 +121,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}
-
                 className="flex flex-col justify-start gap-10">
 
                 <FormField
@@ -157,6 +156,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                 />
                             </FormControl>
 
+                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -178,6 +178,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                 {/* {...field} is a spread operator, used to pass down props in the Input component */}
                             </FormControl>
 
+                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -198,6 +199,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                 />
                             </FormControl>
 
+                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -217,6 +219,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                                     {...field} />
                             </FormControl>
 
+                            <FormMessage />
                         </FormItem>
                     )}
                 />
