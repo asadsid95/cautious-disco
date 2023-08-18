@@ -143,3 +143,33 @@ export async function fetchUsers({
         throw new Error(`Failed to fetch users: ${error.message}`)
     }
 }
+
+// TLDR; gets all comments from other users
+export async function getActivity(userId: string) {
+    try {
+        connectToDB()
+
+        // get all thread by the user
+        const userThreads = await Thread.find({ author: userId })
+
+        // get all child thread ids (replies) from children field
+        const childThreadIds = userThreads.reduce((acc, userThreads) => {
+            return acc.concat(userThreads.children)
+        }, [])
+
+        // get all replies excluding the ones made by the user
+        const replies = await Thread.find({
+            _id: { $in: childThreadIds },
+            author: { $ne: userId }
+        }).populate({
+            path: 'author',
+            model: User,
+            select: 'name image _id'
+        })
+
+        return replies
+
+    } catch (error) {
+        throw new Error(`Failed to fetch activity: ${error.message}`)
+    }
+}
