@@ -1,3 +1,9 @@
+TODO:
+- improving tweet's UI to show number of replies
+- suggested users and communities
+
+------
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
