@@ -4,11 +4,12 @@ import Link from "next/link"
 import { usePathname, useRouter } from 'next/navigation'
 import { sidebarLinks } from '@/constants/index'
 import Image from "next/image"
-import { SignedIn, SignOutButton } from "@clerk/nextjs"
+import { SignedIn, SignOutButton, useAuth } from "@clerk/nextjs"
 
 function LeftSidebar() {
     const router = useRouter()
     const pathname = usePathname()
+    const { userId } = useAuth()
 
     return (
 
@@ -20,6 +21,8 @@ function LeftSidebar() {
                     // (if URL segment has the link route && route length is bigger than 1 ) OR pathname is equal to route, active is true
                     const isActive = (pathname.includes(link.route) && link.route.length > 1)
                         || pathname === link.route
+
+                    if (link.route === '/profile') link.route = `${link.route}/${userId}`
 
                     return (
                         (

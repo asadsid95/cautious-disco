@@ -41,8 +41,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
             <div className="mt-10">
                 {thread.children.map((childItem: any) => (
-
-
                     <ThreadCard
                         key={childItem._id}
                         id={childItem._id}
